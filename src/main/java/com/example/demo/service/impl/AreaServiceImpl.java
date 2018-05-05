@@ -2,6 +2,8 @@ package com.example.demo.service.impl;
 
 import com.example.demo.dao.AreaDao;
 import com.example.demo.entity.Area;
+import com.example.demo.enums.ResultEnum;
+import com.example.demo.exception.DemoException;
 import com.example.demo.service.AreaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -29,58 +31,52 @@ public class AreaServiceImpl implements AreaService {
 
     @Transactional//事务控制默认接收RuntimeException回滚
     @Override
-    public boolean addArea(Area area) {
+    public void addArea(Area area) {
         if(area.getAreaName() != null && !"".equals(area.getAreaName())){
             area.setCreateTime(new Date());
             try {
                 int effectedNum = areaDao.insertArea(area);
-                if(effectedNum > 0){
-                    return true;
-                }else {
-                    throw new RuntimeException("插入区域信息失败");
+                if(effectedNum == 0){
+                    throw new DemoException(ResultEnum.DATABASE_OPERATE);
                 }
             }catch (Exception e){
-                throw new RuntimeException("插入区域信息失败"+e.getMessage());
+                throw new DemoException(ResultEnum.DATABASE_OPERATE);
             }
         }else {
-            throw new RuntimeException("区域信息不能为空");
+            throw new DemoException(ResultEnum.PARAMETER_NULL);
         }
     }
 
     @Override
-    public boolean modifyArea(Area area) {
+    public void modifyArea(Area area) {
         if(area.getAreaId() != null && area.getAreaId() > 0){
             area.setLastEditTime(new Date());
             try {
                 int effectedNum = areaDao.updateArea(area);
-                if(effectedNum > 0){
-                    return true;
-                }else {
-                    throw new RuntimeException("更新区域信息失败");
+                if(effectedNum == 0){
+                    throw new DemoException(ResultEnum.DATABASE_OPERATE);
                 }
             }catch (Exception e){
-                throw new RuntimeException("更新区域信息失败"+e.getMessage());
+                throw new DemoException(ResultEnum.DATABASE_OPERATE);
             }
         }else {
-            throw new RuntimeException("区域信息不能为空");
+            throw new DemoException(ResultEnum.PARAMETER_NULL);
         }
     }
 
     @Override
-    public boolean deleteArea(int areaId) {
+    public void deleteArea(int areaId) {
         if(areaId > 0){
             try {
                 int effectedNum = areaDao.deleteArea(areaId);
-                if(effectedNum > 0){
-                    return true;
-                }else {
-                    throw new RuntimeException("删除区域信息失败");
+                if(effectedNum == 0){
+                    throw new DemoException(ResultEnum.DATABASE_OPERATE);
                 }
             }catch (Exception e){
-                throw new RuntimeException("删除区域信息失败"+e.getMessage());
+                throw new DemoException(ResultEnum.DATABASE_OPERATE);
             }
         }else {
-            throw new RuntimeException("区域Id不能为空");
+            throw new DemoException(ResultEnum.PARAMETER_NULL);
         }
     }
 }

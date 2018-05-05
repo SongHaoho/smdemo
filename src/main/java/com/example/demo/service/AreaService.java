@@ -25,7 +25,7 @@ public interface AreaService {
      * @param area
      * @return
      */
-    boolean addArea(Area area);
+    void addArea(Area area);
 
     /**
      * 修改区域信息
@@ -33,7 +33,7 @@ public interface AreaService {
      * @param area
      * @return
      */
-    boolean modifyArea(Area area);
+    void modifyArea(Area area);
 
     /**
      * 删除区域信息
@@ -41,5 +41,5 @@ public interface AreaService {
      * @param areaId
      * @return
      */
-    boolean deleteArea(int areaId);
+    void deleteArea(int areaId);
 }

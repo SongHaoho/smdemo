@@ -34,7 +34,7 @@ public class ExceptionHandle {
             DemoException demoException = (DemoException) e;
             return ResultUtil.returnError(demoException.getCode(),demoException.getMessage());
         }else {
-            logger.error("系统异常: {}",e.getMessage());
+            logger.error("系统异常: {}",e);
             return ResultUtil.returnError(-1,e.getMessage());
         }
     }

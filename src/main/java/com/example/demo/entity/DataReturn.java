@@ -43,4 +43,14 @@ public class DataReturn<T> {
     public void setData(T data) {
         this.data = data;
     }
+
+    // 为了处理请求打印日志-打印出返回结果的具体内容
+    @Override
+    public String toString() {
+        return "DataReturn{" +
+                "code=" + code +
+                ", msg='" + msg + '\'' +
+                ", data=" + data +
+                '}';
+    }
 }

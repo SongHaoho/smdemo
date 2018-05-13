@@ -91,6 +91,7 @@ public class AreaVo extends BaseQuery {
                 ", createTime=" + createTime +
                 ", lastEditTime=" + lastEditTime +
                 ", active='" + active + '\'' +
+                ",BaseQuery='" +super.toString() + '\'' +
                 '}';
     }
 }

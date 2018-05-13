@@ -47,5 +47,13 @@ public class BaseQuery {
         this.sidx = sidx;
     }
 
-
+    @Override
+    public String toString() {
+        return "BaseQuery{" +
+                "pageNum=" + pageNum +
+                ", pageSize=" + pageSize +
+                ", sord='" + sord + '\'' +
+                ", sidx='" + sidx + '\'' +
+                '}';
+    }
 }

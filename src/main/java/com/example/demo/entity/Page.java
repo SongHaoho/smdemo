@@ -120,4 +120,17 @@ public class Page<T> {
     public void setData(T data) {
         this.data = data;
     }
+
+    @Override
+    public String toString() {
+        return "Page{" +
+                "totalNumber=" + totalNumber +
+                ", currentPage=" + currentPage +
+                ", totalPage=" + totalPage +
+                ", pageNumber=" + pageNumber +
+                ", dbIndex=" + dbIndex +
+                ", dbNumber=" + dbNumber +
+                ", data=" + data +
+                '}';
+    }
 }

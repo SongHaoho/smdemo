@@ -1,6 +1,7 @@
 package com.example.demo.web;
 
-import com.example.demo.entity.Area;
+import com.example.demo.bean.Area;
+import com.example.demo.bean.vo.AreaVo;
 import com.example.demo.entity.DataReturn;
 import com.example.demo.service.AreaService;
 import com.example.demo.utils.ResultUtil;
@@ -9,10 +10,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
-
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 @RestController
 @RequestMapping("/department")
@@ -34,6 +31,11 @@ public class AreaNewController {
     @RequestMapping(value = "/listarea",method = RequestMethod.GET)
     public DataReturn<Area> listArea(){
         return ResultUtil.returnSuccess(areaService.getAreaList());
+    }
+
+    @RequestMapping(value = "/queryAreaByPage",method = RequestMethod.POST)
+    public DataReturn<Area> queryAreaByPage(@RequestBody AreaVo areaVo){
+        return ResultUtil.returnSuccess(areaService.queryAreaByPage(areaVo));
     }
 
     // http://localhost:8082/demo/department/getareabyid?areaId=1

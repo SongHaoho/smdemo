@@ -1,8 +1,10 @@
 package com.example.demo.dao;
 
-import com.example.demo.entity.Area;
+import com.example.demo.bean.Area;
+import com.example.demo.bean.vo.AreaVo;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by SongHao on 2018/4/17.
@@ -46,4 +48,19 @@ public interface AreaDao {//Alt+Enter => Create Test(创建单元测试类)
      * @return
      */
     int deleteArea(int areaId);
+
+
+    /**
+     * 列出区域列表(分页)
+     *
+     * @return areaList
+     */
+    List<Area> queryAreaByPage(Map<String,Object> map);
+
+    /**
+     * 查询总数量(分页)
+     * @param areaVo
+     * @return
+     */
+    int count(AreaVo areaVo);
 }

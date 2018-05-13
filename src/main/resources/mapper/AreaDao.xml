@@ -5,25 +5,25 @@
 
 <!-- dao层mybatis配置 mapper  -->
 <mapper namespace="com.example.demo.dao.AreaDao">
-    <select id="queryArea" resultType="com.example.demo.entity.Area">
-        SELECT area_id, area_name, priority, create_time, last_edit_time
+    <select id="queryArea" resultType="com.example.demo.bean.Area">
+        SELECT area_id, area_name, priority, create_time, last_edit_time, active
 		FROM tb_area
 		ORDER BY priority
 		DESC
     </select>
-    <select id="queryAreaById" resultType="com.example.demo.entity.Area">
-        SELECT area_id, area_name, priority, create_time, last_edit_time
+    <select id="queryAreaById" resultType="com.example.demo.bean.Area">
+        SELECT area_id, area_name, priority, create_time, last_edit_time, active
         FROM tb_area
         WHERE area_id =#{areaId}
     </select>
     <insert id="insertArea" useGeneratedKeys="true" keyProperty="areaId"
-            keyColumn="area_id" parameterType="com.example.demo.entity.Area">
+            keyColumn="area_id" parameterType="com.example.demo.bean.Area">
         INSERT INTO
         tb_area(area_name,priority,create_time,last_edit_time)
         VALUES
         (#{areaName},#{priority},#{createTime},#{lastEditTime})
     </insert>
-    <update id="updateArea" parameterType="com.example.demo.entity.Area">
+    <update id="updateArea" parameterType="com.example.demo.bean.Area">
         update tb_area
         <set>
             <if test="areaName != null">area_name=#{areaName},</if>
@@ -38,4 +38,23 @@
         WHERE
         area_id =#{areaId}
     </delete>
+
+    <select id="queryAreaByPage" parameterType="java.util.Map" resultType="com.example.demo.bean.Area">
+        SELECT area_id, area_name, priority, create_time, last_edit_time, active
+		FROM tb_area
+        <where>
+            <if test="area.active != null and !&quot;&quot;.equals(area.active.trim())">
+                and active =#{area.active}
+            </if>
+        </where>
+        ORDER BY priority DESC limit #{page.dbIndex},#{page.dbNumber}
+    </select>
+    <select id="count" parameterType="com.example.demo.bean.vo.AreaVo" resultType="int">
+        SELECT count(*) FROM tb_area
+        <where>
+            <if test="active != null and !&quot;&quot;.equals(active.trim())">
+                and active =#{active}
+            </if>
+        </where>
+    </select>
 </mapper>

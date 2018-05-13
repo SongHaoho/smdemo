@@ -1,7 +1,9 @@
 package com.example.demo.service.impl;
 
+import com.example.demo.bean.vo.AreaVo;
 import com.example.demo.dao.AreaDao;
-import com.example.demo.entity.Area;
+import com.example.demo.bean.Area;
+import com.example.demo.entity.Page;
 import com.example.demo.enums.ResultEnum;
 import com.example.demo.exception.DemoException;
 import com.example.demo.service.AreaService;
@@ -10,7 +12,10 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.regex.Pattern;
 
 @Service
 public class AreaServiceImpl implements AreaService {
@@ -22,6 +27,27 @@ public class AreaServiceImpl implements AreaService {
     public List<Area> getAreaList() {
         return areaDao.queryArea();
     }
+
+    @Override
+    public Page queryAreaByPage(AreaVo areaVo) {
+        // 接收页面的值
+        int currentPage = areaVo.getPageNum();
+        int pageNumber = areaVo.getPageSize();
+        // 根据查询条件查询总条数
+        int totalNumber = areaDao.count(areaVo);
+        // 创建分页对象,组织分页查询参数
+        Page page = new Page();
+        page.setCurrentPage(currentPage);
+        page.setPageNumber(pageNumber);
+        page.setTotalNumber(totalNumber);
+        Map<String,Object> parameter = new HashMap<String,Object>();
+        parameter.put("area",areaVo);
+        parameter.put("page",page);
+        List<Area> areaList = areaDao.queryAreaByPage(parameter);
+        page.setData(areaList);
+        return page;
+    }
+
 
     @Override
     public Area getAreaById(int areaId) {

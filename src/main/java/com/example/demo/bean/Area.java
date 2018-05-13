@@ -1,4 +1,4 @@
-package com.example.demo.entity;
+package com.example.demo.bean;
 
 import java.util.Date;
 
@@ -26,6 +26,11 @@ public class Area {
      * 更新时间
      */
     private Date lastEditTime;
+
+    /**
+     *  是否逻辑删除
+     */
+    private String active;
 
     public Integer getAreaId() {
         return areaId;
@@ -67,6 +72,14 @@ public class Area {
         this.lastEditTime = lastEditTime;
     }
 
+    public String getActive() {
+        return active;
+    }
+
+    public void setActive(String active) {
+        this.active = active;
+    }
+
     @Override
     public String toString() {
         return "Area{" +
@@ -75,6 +88,7 @@ public class Area {
                 ", priority=" + priority +
                 ", createTime=" + createTime +
                 ", lastEditTime=" + lastEditTime +
+                ", active='" + active + '\'' +
                 '}';
     }
 }

@@ -5,6 +5,8 @@ import com.example.demo.bean.vo.AreaVo;
 import com.example.demo.entity.DataReturn;
 import com.example.demo.service.AreaService;
 import com.example.demo.utils.ResultUtil;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,6 +18,8 @@ import org.springframework.web.bind.annotation.RestController;
 public class AreaNewController {
     @Autowired
     private AreaService areaService;
+
+    private static Logger logger = LoggerFactory.getLogger(AreaNewController.class);
 
     /* 最初的返回数据结构
     // http://localhost:8082/demo/school/listarea
@@ -62,6 +66,16 @@ public class AreaNewController {
     @RequestMapping(value = "/removearea",method = RequestMethod.GET)
     public DataReturn removeArea(Integer areaId){
         areaService.deleteArea(areaId);
+        return ResultUtil.returnSuccess();
+    }
+
+    // 日志测试
+    @RequestMapping(value = "/testlog",method = RequestMethod.GET)
+    public DataReturn testLog(){
+        logger.debug("======debug");
+        logger.info("======info");
+        logger.warn("======warn");
+        logger.error("======error");
         return ResultUtil.returnSuccess();
     }
 }

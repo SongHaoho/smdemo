@@ -16,7 +16,7 @@
         <!-- 开启驼峰命名转换 ：Table{create_time} -> Entity{createTime} -->
         <setting name="mapUnderscoreToCamelCase" value="true"/>
 
-        <!-- 开启控制台打印sql -->
-        <setting name="logImpl" value="STDOUT_LOGGING"></setting>
+        <!-- 开启控制台打印sql和结果 -->
+        <!--<setting name="logImpl" value="STDOUT_LOGGING"></setting>-->
     </settings>
 </configuration>

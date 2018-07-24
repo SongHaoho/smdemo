@@ -2,7 +2,7 @@
 <configuration>
     <contextName>logback</contextName>
     <!-- 设置变量：日志文件保存目录 -->
-    <property name="log.path" value="F:/log/logback" />
+    <property name="log.path" value="E:/log/logback" />
     <!--设置日志格式-->
     <property name="CONSOLE_LOG_PATTERN"
               value="%d{yyyy-MM-dd HH:mm:ss.SSS} %contextName [%thread] %-5level %logger{36} - %msg%n"/>
